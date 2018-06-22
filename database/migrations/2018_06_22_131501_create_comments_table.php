@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePeopleTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreatePeopleTable extends Migration
      */
     public function up()
     {
-      Schema::create('people', function (Blueprint $table) {
+      Schema::create('comments', function (Blueprint $table) {
         $table->increments('id');
-        $table->string('first_name');
-        $table->string('last_name');
-        $table->string('twitter');
+        $table->integer('article_id')->unsigned();
+        $table->integer('author_id')->unsigned();
+        $table->text('body');
         $table->timestamps();
+        $table->foreign('article_id')->references('id')->on('articles');
+        $table->foreign('author_id')->references('id')->on('people');
       });
     }
 
@@ -29,6 +31,6 @@ class CreatePeopleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('people');
+        Schema::dropIfExists('comments');
     }
 }

@@ -13,10 +13,13 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-        });
+      Schema::create('articles', function (Blueprint $table) {
+        $table->increments('id');
+        $table->integer('author_id')->unsigned();
+        $table->string('title');
+        $table->timestamps();
+        $table->foreign('author_id')->references('id')->on('people');
+      });
     }
 
     /**
