@@ -20,6 +20,10 @@ class ArticleResource extends JsonResource
         'attributes'    => [
           'title' => $this->title,
         ],
+//        'relationships' => new ArticlesRelationshipResource($this),
+        'links'         => [
+          'self' => route('articles.show', ['article' => $this->id]),
+        ],
       ];
     }
 }

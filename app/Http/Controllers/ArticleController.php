@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Http\Resources\ArticleResource;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -14,7 +15,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        return 'ArticleController:index';
     }
 
     /**
@@ -42,11 +43,12 @@ class ArticleController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Article  $article
-     * @return \Illuminate\Http\Response
+     * @return ArticleResource|\Illuminate\Http\Response
      */
     public function show(Article $article)
     {
-        //
+      ArticleResource::withoutWrapping();
+      return new ArticleResource($article);
     }
 
     /**
